@@ -6,9 +6,9 @@ import { Heart, ArrowRight } from "lucide-react";
 export const Route = createFileRoute("/adopt")({
   head: () => ({
     meta: [
-      { title: "Adopt — Mont Choisy Animal Angels" },
-      { name: "description", content: "Meet the dogs and cats waiting for a forever home with Mont Choisy Animal Angels in Mauritius." },
-      { property: "og:title", content: "Adopt a rescue — Mont Choisy Animal Angels" },
+      { title: "Adopt — Animal Angels Mont Choisy" },
+      { name: "description", content: "Meet the dogs and cats waiting for a forever home with Animal Angels Mont Choisy in Mauritius." },
+      { property: "og:title", content: "Adopt a rescue — Animal Angels Mont Choisy" },
       { property: "og:description", content: "Our adoptable dogs and cats are ready to meet their family." },
     ],
   }),

@@ -4,9 +4,9 @@ import { HandHeart, Home, Car, Megaphone, PawPrint, Stethoscope } from "lucide-r
 export const Route = createFileRoute("/get-involved")({
   head: () => ({
     meta: [
-      { title: "Get Involved — Mont Choisy Animal Angels" },
+      { title: "Get Involved — Animal Angels Mont Choisy" },
       { name: "description", content: "Foster, volunteer, transport or fundraise — find your way to help rescue animals in Mauritius." },
-      { property: "og:title", content: "Get Involved — Mont Choisy Animal Angels" },
+      { property: "og:title", content: "Get Involved — Animal Angels Mont Choisy" },
       { property: "og:description", content: "Many ways to help. Pick the one that fits your life." },
     ],
   }),

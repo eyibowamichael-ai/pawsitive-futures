@@ -5,9 +5,9 @@ import { Compass, Heart, Shield, Sprout } from "lucide-react";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About — Mont Choisy Animal Angels" },
-      { name: "description", content: "Learn about Mont Choisy Animal Angels — a volunteer-run rescue caring for stray dogs and cats in Mauritius." },
-      { property: "og:title", content: "About Mont Choisy Animal Angels" },
+      { title: "About — Animal Angels Mont Choisy" },
+      { name: "description", content: "Animal Angels Mont Choisy is a nonprofit caring for stray dogs and cats in northern Mauritius." },
+      { property: "og:title", content: "About Animal Angels Mont Choisy" },
       { property: "og:description", content: "Our story, our mission and the volunteers behind the rescue." },
     ],
   }),
@@ -24,9 +24,10 @@ function About() {
             Born from the simple idea that <em className="not-italic italic text-primary">no animal</em> should suffer alone.
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Mont Choisy Animal Angels is a volunteer-run initiative based in
-            northern Mauritius. We came together because we couldn't look away —
-            and because every wagging tail and gentle purr we save is worth it.
+            Animal Angels Mont Choisy is a registered nonprofit based at 95
+            Morcellement Mont Choisy, in the north of Mauritius. We came
+            together because we couldn't look away — and because every wagging
+            tail and gentle purr we save is worth it.
           </p>
         </div>
       </section>

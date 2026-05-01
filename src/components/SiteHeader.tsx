@@ -3,6 +3,8 @@ import { useState } from "react";
 import logo from "@/assets/logo.jpeg";
 import { Menu, X, Heart } from "lucide-react";
 
+const WHATSAPP = "https://wa.me/23058200966";
+
 const nav = [
   { to: "/", label: "Home" },
   { to: "/about", label: "About" },
@@ -19,8 +21,8 @@ export function SiteHeader() {
         <Link to="/" className="flex items-center gap-3 group">
           <img src={logo} alt="Mont Choisy Animal Angels logo" className="h-12 w-12 rounded-full object-cover ring-1 ring-border" />
           <div className="leading-tight hidden sm:block">
-            <div className="font-display text-lg text-primary font-semibold tracking-tight">Mont Choisy</div>
-            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Animal Angels</div>
+            <div className="font-display text-lg text-primary font-semibold tracking-tight">Animal Angels</div>
+            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Mont Choisy · Mauritius</div>
           </div>
         </Link>
 

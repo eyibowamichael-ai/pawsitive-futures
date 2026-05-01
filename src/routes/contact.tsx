@@ -1,14 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MapPin, Facebook, Send } from "lucide-react";
+import { Mail, MapPin, Facebook, Instagram, Phone, MessageCircle, Send } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — Mont Choisy Animal Angels" },
-      { name: "description", content: "Get in touch with Mont Choisy Animal Angels about adoption, fostering, volunteering or donations." },
-      { property: "og:title", content: "Contact Mont Choisy Animal Angels" },
-      { property: "og:description", content: "We'd love to hear from you." },
+      { title: "Contact — Animal Angels Mont Choisy" },
+      { name: "description", content: "Get in touch with Animal Angels Mont Choisy about adoption, fostering, volunteering or donations. WhatsApp +230 5820 0966." },
+      { property: "og:title", content: "Contact Animal Angels Mont Choisy" },
+      { property: "og:description", content: "Call, WhatsApp or email us — we'd love to hear from you." },
     ],
   }),
   component: Contact,
@@ -34,9 +34,12 @@ function Contact() {
       <section className="mx-auto max-w-6xl px-5 sm:px-8 py-16 grid lg:grid-cols-5 gap-10">
         <div className="lg:col-span-2 space-y-6">
           {[
-            { icon: MapPin, label: "Where we are", value: "Mont Choisy, northern Mauritius" },
-            { icon: Mail, label: "Email", value: "hello@montchoisyangels.org" },
-            { icon: Facebook, label: "Facebook", value: "Mont Choisy Animal Angels", href: "https://www.facebook.com/share/1Nswsqm9CH/" },
+            { icon: MapPin, label: "Where we are", value: "95 Morcellement Mont Choisy, Mauritius" },
+            { icon: Phone, label: "Phone", value: "+230 5820 0966", href: "tel:+23058200966" },
+            { icon: MessageCircle, label: "WhatsApp", value: "+230 5820 0966", href: "https://wa.me/23058200966" },
+            { icon: Mail, label: "Email", value: "animalangels.mc@gmail.com", href: "mailto:animalangels.mc@gmail.com" },
+            { icon: Facebook, label: "Facebook", value: "Animal Angels Mont Choisy", href: "https://www.facebook.com/share/1Nswsqm9CH/" },
+            { icon: Instagram, label: "Instagram", value: "@animal_angels_montchoisy", href: "https://www.instagram.com/animal_angels_montchoisy/" },
           ].map((c) => (
             <div key={c.label} className="rounded-3xl bg-card border border-border p-6 flex gap-4">
               <div className="h-11 w-11 rounded-2xl bg-primary-soft text-primary flex items-center justify-center shrink-0">
