@@ -8,9 +8,9 @@ import { Heart, PawPrint, HandHeart, Home as HomeIcon, ArrowRight, Sparkles } fr
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Mont Choisy Animal Angels — Rescue & Adopt in Mauritius" },
+      { title: "Animal Angels Mont Choisy — Rescue & Adopt in Mauritius" },
       { name: "description", content: "We rescue, sterilise and rehome stray dogs and cats in northern Mauritius. Adopt, foster, volunteer or donate to help." },
-      { property: "og:title", content: "Mont Choisy Animal Angels" },
+      { property: "og:title", content: "Animal Angels Mont Choisy" },
       { property: "og:description", content: "Giving stray dogs and cats in Mauritius the second chance they deserve." },
     ],
   }),

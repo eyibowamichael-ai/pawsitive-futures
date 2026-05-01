@@ -4,9 +4,9 @@ import { Heart, Stethoscope, Utensils, Home } from "lucide-react";
 export const Route = createFileRoute("/donate")({
   head: () => ({
     meta: [
-      { title: "Donate — Mont Choisy Animal Angels" },
+      { title: "Donate — Animal Angels Mont Choisy" },
       { name: "description", content: "Your donation funds vet care, food, sterilisation and rescue for stray animals in Mauritius." },
-      { property: "og:title", content: "Donate — Mont Choisy Animal Angels" },
+      { property: "og:title", content: "Donate — Animal Angels Mont Choisy" },
       { property: "og:description", content: "Help us rescue, heal and rehome more animals." },
     ],
   }),
@@ -62,12 +62,15 @@ function Donate() {
             </p>
           </div>
           <div className="rounded-2xl bg-card border border-border p-6 space-y-3 text-sm">
-            <div className="flex justify-between"><span className="text-muted-foreground">Beneficiary</span><span className="font-semibold">Mont Choisy Animal Angels</span></div>
-            <div className="flex justify-between"><span className="text-muted-foreground">Bank</span><span className="font-semibold">— on request —</span></div>
-            <div className="flex justify-between"><span className="text-muted-foreground">Account</span><span className="font-semibold">— on request —</span></div>
-            <div className="pt-3 border-t border-border">
-              <a href="mailto:hello@montchoisyangels.org" className="inline-flex w-full justify-center rounded-full bg-coral text-coral-foreground px-6 py-3 font-semibold">
-                Email us for details
+            <div className="flex justify-between gap-4"><span className="text-muted-foreground">Beneficiary</span><span className="font-semibold text-right">Animal Angels Mont Choisy</span></div>
+            <div className="flex justify-between gap-4"><span className="text-muted-foreground">WhatsApp</span><span className="font-semibold text-right">+230 5820 0966</span></div>
+            <div className="flex justify-between gap-4"><span className="text-muted-foreground">Email</span><span className="font-semibold text-right">animalangels.mc@gmail.com</span></div>
+            <div className="pt-3 border-t border-border grid gap-2">
+              <a href="https://wa.me/23058200966?text=Hello%20Animal%20Angels%2C%20I%27d%20like%20to%20donate." target="_blank" rel="noreferrer" className="inline-flex w-full justify-center rounded-full bg-coral text-coral-foreground px-6 py-3 font-semibold">
+                Message us on WhatsApp
+              </a>
+              <a href="mailto:animalangels.mc@gmail.com" className="inline-flex w-full justify-center rounded-full border border-border px-6 py-3 font-semibold hover:bg-muted">
+                Email for bank details
               </a>
             </div>
           </div>
