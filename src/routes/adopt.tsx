@@ -1,7 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import dog from "@/assets/dog.jpg";
-import cat from "@/assets/cat.jpg";
+import { useEffect, useState } from "react";
+import dogPlaceholder from "@/assets/dog.jpg";
+import catPlaceholder from "@/assets/cat.jpg";
 import { Heart, ArrowRight } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/adopt")({
   head: () => ({
@@ -15,18 +17,31 @@ export const Route = createFileRoute("/adopt")({
   component: Adopt,
 });
 
-type Pet = { name: string; species: "Dog" | "Cat"; age: string; sex: string; img: string; story: string };
-
-const pets: Pet[] = [
-  { name: "Bula", species: "Dog", age: "2 years", sex: "Female", img: dog, story: "Sweet, gentle and great with kids. Loves long beach walks." },
-  { name: "Mango", species: "Cat", age: "1 year", sex: "Male", img: cat, story: "A cuddler who purrs the moment you sit down." },
-  { name: "Kai", species: "Dog", age: "8 months", sex: "Male", img: dog, story: "Playful pup full of energy — looking for an active family." },
-  { name: "Luna", species: "Cat", age: "3 years", sex: "Female", img: cat, story: "Calm, independent and quietly affectionate." },
-  { name: "Rocky", species: "Dog", age: "4 years", sex: "Male", img: dog, story: "A loyal soul who'd love a quiet home and a soft couch." },
-  { name: "Maya", species: "Cat", age: "2 years", sex: "Female", img: cat, story: "Curious, gentle, and the best home‑office companion." },
-];
+type Pet = {
+  id: string;
+  name: string;
+  species: string;
+  age: string;
+  sex: string;
+  story: string;
+  photo_url: string | null;
+};
 
 function Adopt() {
+  const [pets, setPets] = useState<Pet[] | null>(null);
+
+  useEffect(() => {
+    supabase
+      .from("pets")
+      .select("id,name,species,age,sex,story,photo_url")
+      .eq("status", "available")
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .then(({ data }) => setPets(data ?? []));
+  }, []);
+
+  const fallback = (species: string) => (species === "Cat" ? catPlaceholder : dogPlaceholder);
+
   return (
     <>
       <section className="bg-paper">
@@ -43,26 +58,44 @@ function Adopt() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 sm:px-8 py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {pets.map((p) => (
-            <article key={p.name} className="group rounded-3xl overflow-hidden bg-card border border-border hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all">
-              <div className="aspect-[4/5] overflow-hidden">
-                <img src={p.img} alt={`${p.name}, a rescue ${p.species.toLowerCase()}`} loading="lazy" width={1024} height={1280} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-              </div>
-              <div className="p-6">
-                <div className="flex items-baseline justify-between">
-                  <h3 className="font-display text-2xl">{p.name}</h3>
-                  <span className="text-xs uppercase tracking-wider text-coral font-semibold">{p.species}</span>
+        {pets === null ? (
+          <p className="text-center text-muted-foreground">Loading our angels…</p>
+        ) : pets.length === 0 ? (
+          <div className="text-center max-w-xl mx-auto">
+            <p className="text-muted-foreground">
+              No pets are listed right now. Please check back soon, or get in touch — we always have animals in our care.
+            </p>
+            <Link to="/contact" className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+              Contact us <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        ) : (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {pets.map((p) => (
+              <article key={p.id} className="group rounded-3xl overflow-hidden bg-card border border-border hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all">
+                <div className="aspect-[4/5] overflow-hidden">
+                  <img
+                    src={p.photo_url ?? fallback(p.species)}
+                    alt={`${p.name}, a rescue ${p.species.toLowerCase()}`}
+                    loading="lazy"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
                 </div>
-                <p className="text-xs text-muted-foreground mt-1">{p.age} · {p.sex}</p>
-                <p className="mt-3 text-sm text-foreground/80 leading-relaxed">{p.story}</p>
-                <Link to="/contact" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
-                  Ask about {p.name} <ArrowRight className="h-3.5 w-3.5" />
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                <div className="p-6">
+                  <div className="flex items-baseline justify-between">
+                    <h3 className="font-display text-2xl">{p.name}</h3>
+                    <span className="text-xs uppercase tracking-wider text-coral font-semibold">{p.species}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">{p.age} · {p.sex}</p>
+                  <p className="mt-3 text-sm text-foreground/80 leading-relaxed">{p.story}</p>
+                  <Link to="/contact" className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+                    Ask about {p.name} <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </article>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="mx-auto max-w-7xl px-5 sm:px-8 pb-24">
