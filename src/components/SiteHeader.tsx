@@ -20,7 +20,7 @@ export function SiteHeader() {
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
           <img src={logo} alt="Mont Choisy Animal Angels logo" className="h-12 w-12 rounded-full object-cover ring-1 ring-border" />
-          <div className="leading-tight hidden sm:block">
+          <div className="leading-tight">
             <div className="font-display text-lg text-primary font-semibold tracking-tight">Animal Angels</div>
             <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Mont Choisy · Mauritius</div>
           </div>
