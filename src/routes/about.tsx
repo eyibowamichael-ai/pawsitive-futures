@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import volunteers from "@/assets/volunteers.jpg";
 import { Compass, Heart, Shield, Sprout } from "lucide-react";
+import { usePageContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -15,20 +16,14 @@ export const Route = createFileRoute("/about")({
 });
 
 function About() {
+  const c = usePageContent("about");
   return (
     <>
       <section className="bg-paper">
         <div className="mx-auto max-w-5xl px-5 sm:px-8 pt-20 pb-16 text-center">
-          <p className="text-xs uppercase tracking-[0.3em] text-coral font-semibold">Our story</p>
-          <h1 className="mt-5 text-5xl sm:text-6xl font-display leading-[1.05] text-balance">
-            Born from the simple idea that <em className="not-italic italic text-primary">no animal</em> should suffer alone.
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Animal Angels Mont Choisy is a registered nonprofit based at 95
-            Morcellement Mont Choisy, in the north of Mauritius. We came
-            together because we couldn't look away — and because every wagging
-            tail and gentle purr we save is worth it.
-          </p>
+          <p className="text-xs uppercase tracking-[0.3em] text-coral font-semibold">{c.hero_eyebrow}</p>
+          <h1 className="mt-5 text-5xl sm:text-6xl font-display leading-[1.05] text-balance">{c.hero_title}</h1>
+          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">{c.hero_body}</p>
         </div>
       </section>
 
@@ -37,17 +32,9 @@ function About() {
           <img src={volunteers} alt="Volunteers caring for rescue dogs" loading="lazy" width={1400} height={900} className="w-full h-full object-cover aspect-[5/4]" />
         </div>
         <div>
-          <h2 className="text-4xl font-display text-balance">A small group, a big heart.</h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            What began with a handful of neighbours feeding strays has grown into
-            an organised network of fosters, drivers, vets and donors. We
-            coordinate daily — from emergency rescues to vaccinations, sterilisations
-            and the careful matching of each animal with the right home.
-          </p>
-          <p className="mt-4 text-muted-foreground leading-relaxed">
-            We don't have a fancy facility or a big budget. What we have is each
-            other, and a community that believes kindness multiplies.
-          </p>
+          <h2 className="text-4xl font-display text-balance">{c.section_title}</h2>
+          <p className="mt-5 text-muted-foreground leading-relaxed">{c.section_body_1}</p>
+          <p className="mt-4 text-muted-foreground leading-relaxed">{c.section_body_2}</p>
         </div>
       </section>
 
