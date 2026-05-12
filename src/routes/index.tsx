@@ -4,6 +4,7 @@ import dog from "@/assets/dog.jpg";
 import cat from "@/assets/cat.jpg";
 import volunteers from "@/assets/volunteers.jpg";
 import { Heart, PawPrint, HandHeart, Home as HomeIcon, ArrowRight, Sparkles } from "lucide-react";
+import { usePageContent } from "@/lib/site-content";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -18,6 +19,12 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
+  const c = usePageContent("home");
+  const stats = [
+    { n: c.stat_1_number, l: c.stat_1_label },
+    { n: c.stat_2_number, l: c.stat_2_label },
+    { n: c.stat_3_number, l: c.stat_3_label },
+  ];
   return (
     <>
       {/* HERO */}
@@ -25,32 +32,26 @@ function Home() {
         <div className="mx-auto max-w-7xl px-5 sm:px-8 pt-14 pb-20 lg:pt-20 lg:pb-32 grid lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-6 relative z-10">
             <span className="inline-flex items-center gap-2 rounded-full bg-primary-soft text-primary px-3 py-1.5 text-xs font-medium tracking-wide">
-              <Sparkles className="h-3.5 w-3.5" /> A second chance for every paw
+              <Sparkles className="h-3.5 w-3.5" /> {c.hero_eyebrow}
             </span>
             <h1 className="mt-6 text-5xl sm:text-6xl lg:text-7xl font-display font-semibold leading-[1.02] text-balance text-ink">
-              Every animal<br />
-              deserves to be <em className="text-coral not-italic font-display italic">loved.</em>
+              {c.hero_title_1}<br />
+              <em className="text-coral not-italic font-display italic">{c.hero_title_2}</em>
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground leading-relaxed text-pretty">
-              We're a community of volunteers in Mont Choisy, Mauritius — rescuing
-              stray and abandoned dogs and cats, caring for them, and matching
-              them with families who'll love them for life.
+              {c.hero_body}
             </p>
             <div className="mt-9 flex flex-wrap gap-3">
               <Link to="/adopt" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm font-semibold hover:opacity-90 transition shadow-[var(--shadow-glow)]">
-                Find your companion <ArrowRight className="h-4 w-4" />
+                {c.hero_cta_primary} <ArrowRight className="h-4 w-4" />
               </Link>
               <Link to="/donate" className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-7 py-3.5 text-sm font-semibold hover:bg-muted transition">
-                <Heart className="h-4 w-4 text-coral fill-coral" /> Donate
+                <Heart className="h-4 w-4 text-coral fill-coral" /> {c.hero_cta_secondary}
               </Link>
             </div>
 
             <div className="mt-12 grid grid-cols-3 gap-6 max-w-md">
-              {[
-                { n: "300+", l: "Animals rescued" },
-                { n: "180+", l: "Forever homes" },
-                { n: "24/7", l: "Volunteer care" },
-              ].map((s) => (
+              {stats.map((s) => (
                 <div key={s.l}>
                   <div className="font-display text-3xl text-primary">{s.n}</div>
                   <div className="text-xs text-muted-foreground mt-1">{s.l}</div>
@@ -150,10 +151,10 @@ function Home() {
         <div className="relative overflow-hidden rounded-[2.5rem] bg-primary text-primary-foreground p-10 sm:p-16 grid lg:grid-cols-2 gap-10 items-center">
           <div>
             <h2 className="text-4xl sm:text-5xl font-display text-balance leading-tight">
-              Become an Angel today.
+              {c.cta_title}
             </h2>
             <p className="mt-4 text-lg opacity-85 max-w-lg">
-              Join the volunteers, fosters and donors making rescue possible in Mont Choisy.
+              {c.cta_body}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/donate" className="inline-flex items-center gap-2 rounded-full bg-coral px-7 py-3.5 text-sm font-semibold text-coral-foreground hover:opacity-90 transition">
