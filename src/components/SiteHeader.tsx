@@ -2,8 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useState } from "react";
 import logo from "@/assets/logo.jpeg";
 import { Menu, X, Heart } from "lucide-react";
-
-const WHATSAPP = "https://wa.me/23058200966";
+import { useSiteSettings } from "@/lib/site-content";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -15,14 +14,15 @@ const nav = [
 
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const settings = useSiteSettings();
   return (
     <header className="sticky top-0 z-40 backdrop-blur-md bg-background/80 border-b border-border/60">
       <div className="mx-auto max-w-7xl px-5 sm:px-8 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={logo} alt="Mont Choisy Animal Angels logo" className="h-12 w-12 rounded-full object-cover ring-1 ring-border" />
+          <img src={logo} alt={`${settings.org_name} logo`} className="h-12 w-12 rounded-full object-cover ring-1 ring-border" />
           <div className="leading-tight">
-            <div className="font-display text-lg text-primary font-semibold tracking-tight">Animal Angels</div>
-            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">Mont Choisy · Mauritius</div>
+            <div className="font-display text-lg text-primary font-semibold tracking-tight">{settings.org_name}</div>
+            <div className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground">{settings.org_tagline}</div>
           </div>
         </Link>
 
@@ -45,7 +45,7 @@ export function SiteHeader() {
             to="/donate"
             className="hidden sm:inline-flex items-center gap-2 rounded-full bg-coral px-5 py-2.5 text-sm font-semibold text-coral-foreground hover:opacity-90 transition shadow-[var(--shadow-soft)]"
           >
-            <Heart className="h-4 w-4 fill-current" /> Donate
+            <Heart className="h-4 w-4 fill-current" /> {settings.donate_label}
           </Link>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -77,7 +77,7 @@ export function SiteHeader() {
               onClick={() => setOpen(false)}
               className="mt-2 inline-flex items-center justify-center gap-2 rounded-full bg-coral px-5 py-3 text-sm font-semibold text-coral-foreground"
             >
-              <Heart className="h-4 w-4 fill-current" /> Donate
+              <Heart className="h-4 w-4 fill-current" /> {settings.donate_label}
             </Link>
           </div>
         </div>
