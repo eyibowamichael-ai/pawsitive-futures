@@ -135,7 +135,10 @@ function PetsTab() {
         if (upErr) throw upErr;
         photo_url = supabase.storage.from("pet-photos").getPublicUrl(path).data.publicUrl;
       }
-      const { error } = await supabase.from("pets").insert({ ...form, photo_url, photoFile: undefined } as never);
+      const { error } = await supabase.from("pets").insert({
+        name: form.name, species: form.species, age: form.age, sex: form.sex,
+        story: form.story, status: form.status, photo_url,
+      });
       if (error) throw error;
       toast.success("Pet added");
       setForm(emptyForm);
