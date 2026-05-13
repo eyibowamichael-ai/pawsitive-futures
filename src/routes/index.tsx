@@ -163,14 +163,9 @@ function Home() {
       {/* MEET OUR PETS */}
       {featured.length > 0 && (
         <section className="mx-auto max-w-7xl px-5 sm:px-8 py-24">
-          <div className="flex items-end justify-between gap-8 flex-wrap mb-12">
-            <div className="max-w-2xl">
-              <p className="text-xs uppercase tracking-[0.25em] text-coral font-semibold mb-3">Meet our pets</p>
-              <h2 className="text-4xl sm:text-5xl font-display text-balance">Looking for their forever family.</h2>
-            </div>
-            <Link to="/adopt" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:opacity-90 transition">
-              View more pets <ArrowRight className="h-4 w-4" />
-            </Link>
+          <div className="mb-12 max-w-2xl">
+            <p className="text-xs uppercase tracking-[0.25em] text-coral font-semibold mb-3">Meet our pets</p>
+            <h2 className="text-4xl sm:text-5xl font-display text-balance">Looking for their forever family.</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 gap-6">
@@ -194,6 +189,11 @@ function Home() {
                 </div>
               </Link>
             ))}
+          </div>
+          <div className="mt-12 flex justify-center">
+            <Link to="/adopt" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm font-semibold hover:opacity-90 transition shadow-[var(--shadow-glow)]">
+              View more pets <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </section>
       )}
