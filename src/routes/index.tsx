@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import hero from "@/assets/hero.jpg";
 import dog from "@/assets/dog.jpg";
 import cat from "@/assets/cat.jpg";
 import volunteers from "@/assets/volunteers.jpg";
 import { Heart, PawPrint, HandHeart, Home as HomeIcon, ArrowRight, Sparkles } from "lucide-react";
 import { usePageContent } from "@/lib/site-content";
+import { supabase } from "@/integrations/supabase/client";
+
+type FeaturedPet = { id: string; name: string; species: string; age: string; sex: string; story: string; photo_url: string | null };
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -25,6 +29,16 @@ function Home() {
     { n: c.stat_2_number, l: c.stat_2_label },
     { n: c.stat_3_number, l: c.stat_3_label },
   ];
+  const [featured, setFeatured] = useState<FeaturedPet[]>([]);
+  useEffect(() => {
+    supabase
+      .from("pets")
+      .select("id,name,species,age,sex,story,photo_url")
+      .eq("status", "available")
+      .order("sort_order")
+      .limit(2)
+      .then(({ data }) => setFeatured(data ?? []));
+  }, []);
   return (
     <>
       {/* HERO */}
@@ -145,6 +159,44 @@ function Home() {
           </div>
         </div>
       </section>
+
+      {/* MEET OUR PETS */}
+      {featured.length > 0 && (
+        <section className="mx-auto max-w-7xl px-5 sm:px-8 py-24">
+          <div className="flex items-end justify-between gap-8 flex-wrap mb-12">
+            <div className="max-w-2xl">
+              <p className="text-xs uppercase tracking-[0.25em] text-coral font-semibold mb-3">Meet our pets</p>
+              <h2 className="text-4xl sm:text-5xl font-display text-balance">Looking for their forever family.</h2>
+            </div>
+            <Link to="/adopt" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-6 py-3 text-sm font-semibold hover:opacity-90 transition">
+              View more pets <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-6">
+            {featured.map((p) => (
+              <Link key={p.id} to="/adopt" className="group rounded-3xl overflow-hidden bg-card border border-border hover:-translate-y-1 hover:shadow-[var(--shadow-soft)] transition-all duration-300">
+                {p.photo_url && (
+                  <div className="aspect-[5/4] overflow-hidden">
+                    <img src={p.photo_url} alt={p.name} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+                )}
+                <div className="p-6">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <h3 className="font-display text-2xl">{p.name}</h3>
+                    <span className="text-xs uppercase tracking-wider text-coral font-semibold">{p.species}</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground mt-1">{p.age} · {p.sex}</p>
+                  <p className="mt-3 text-sm text-foreground/80 line-clamp-3 leading-relaxed">{p.story}</p>
+                  <div className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-primary">
+                    Meet {p.name} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* CTA */}
       <section className="mx-auto max-w-7xl px-5 sm:px-8 py-24">
