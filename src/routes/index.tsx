@@ -29,6 +29,16 @@ function Home() {
     { n: c.stat_2_number, l: c.stat_2_label },
     { n: c.stat_3_number, l: c.stat_3_label },
   ];
+  const [featured, setFeatured] = useState<FeaturedPet[]>([]);
+  useEffect(() => {
+    supabase
+      .from("pets")
+      .select("id,name,species,age,sex,story,photo_url")
+      .eq("status", "available")
+      .order("sort_order")
+      .limit(2)
+      .then(({ data }) => setFeatured(data ?? []));
+  }, []);
   return (
     <>
       {/* HERO */}
