@@ -190,6 +190,11 @@ function Home() {
               </Link>
             ))}
           </div>
+          <div className="mt-12 flex justify-center">
+            <Link to="/adopt" className="inline-flex items-center gap-2 rounded-full bg-primary text-primary-foreground px-7 py-3.5 text-sm font-semibold hover:opacity-90 transition shadow-[var(--shadow-glow)]">
+              View more pets <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
         </section>
       )}
 
