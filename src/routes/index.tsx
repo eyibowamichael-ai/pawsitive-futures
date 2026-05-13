@@ -1,10 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import hero from "@/assets/hero.jpg";
 import dog from "@/assets/dog.jpg";
 import cat from "@/assets/cat.jpg";
 import volunteers from "@/assets/volunteers.jpg";
 import { Heart, PawPrint, HandHeart, Home as HomeIcon, ArrowRight, Sparkles } from "lucide-react";
 import { usePageContent } from "@/lib/site-content";
+import { supabase } from "@/integrations/supabase/client";
+
+type FeaturedPet = { id: string; name: string; species: string; age: string; sex: string; story: string; photo_url: string | null };
 
 export const Route = createFileRoute("/")({
   head: () => ({
